@@ -1,39 +1,33 @@
 import { useEffect, useState } from "react";
+import {
+  getInitialValue,
+  removeFromLocalStorage,
+  syncWithLocalStorage,
+  updateLocalStorage,
+} from "./localStorage.utils";
 
 export function UseStorage(key) {
-  const [value, setValue] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(key));
-    } catch {
-      return null;
-    }
-  });
+  // Initialisation de l'état à partir du localStorage
+  const [value, setValue] = useState(() => getInitialValue(key));
 
+  // Synchronisation avec localStorage entre onglets
+  useEffect(() => {
+    const cleanupSync = syncWithLocalStorage(key, setValue);
+
+    return cleanupSync; // Nettoyage à la fin de l'usage
+  }, [key]);
+
+  // Fonction pour mettre à jour la valeur dans le localStorage
   const update = (val) => {
-    localStorage.setItem(key, JSON.stringify(val));
+    updateLocalStorage(key, val);
     setValue(val);
-    window.dispatchEvent(new Event("storage-" + key));
   };
 
-  const remove = () => update(null);
-
-  useEffect(() => {
-    const sync = () => {
-      try {
-        setValue(JSON.parse(localStorage.getItem(key)));
-      } catch {
-        setValue(null);
-      }
-    };
-
-    window.addEventListener("storage", sync); // entre onglets
-    window.addEventListener("storage-" + key, sync); // même onglet
-
-    return () => {
-      window.removeEventListener("storage", sync);
-      window.removeEventListener("storage-" + key, sync);
-    };
-  }, [key]);
+  // Fonction pour supprimer la valeur du localStorage
+  const remove = () => {
+    removeFromLocalStorage(key);
+    setValue(null);
+  };
 
   return [value, update, remove];
 }

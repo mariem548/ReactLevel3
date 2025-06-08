@@ -7,13 +7,12 @@ export default function SetterComponent() {
 
   return (
     <div>
-      <h2>Setter</h2>
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={() => setStoredValue(input)}>Mettre à jour</button>
+      <button onClick={() => setStoredValue(input)}>Valider</button>
     </div>
   );
 }
