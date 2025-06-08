@@ -3,8 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mariem548.github.io/exo-react-lev3",
-
+"homepage": "https://mariem548.github.io/ReactLevel3",
  "scripts": {
   "dev": "vite",
   "build": "vite build",
