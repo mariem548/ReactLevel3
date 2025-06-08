@@ -40,3 +40,42 @@
 .read-the-docs {
   color: #888;
 }
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.dialog-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+  z-index: 1001;
+  min-width: 320px;
+  min-height: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+  padding: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.dialog-close:hover {
+  color: #222;
+}
