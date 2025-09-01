@@ -1,44 +1,44 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { filterData, highlightMatch } from "./DropDown.utils";
+import { filterListByLabel, highlightSearchMatch } from "./DropDown.utils";
 
 export default function AutoFilterDropdown({ data, labelKey, valueChange }) {
-  const [query, setQuery] = useState("");
-  const [showList, setShowList] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    setShowList(true);
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+    setIsDropdownVisible(true);
   };
 
-  const filtered = filterData(data, labelKey, query);
+  const filteredOptions = filterListByLabel(data, labelKey, searchInput);
 
   return (
     <div className="dropdown-container">
       <input
         type="text"
-        value={query}
-        onChange={handleChange}
-        onFocus={() => setShowList(true)}
-        placeholder="Search..."
+        value={searchInput}
+        onChange={handleInputChange}
+        onFocus={() => setIsDropdownVisible(true)}
+        placeholder="Rechercher..."
         className="dropdown-input"
       />
-      {showList && query && (
+      {isDropdownVisible && searchInput && (
         <ul className="dropdown-list">
-          {filtered.length === 0 ? (
+          {filteredOptions.length === 0 ? (
             <li className="dropdown-item">Aucun résultat</li>
           ) : (
-            filtered.map((item, idx) => (
+            filteredOptions.map((option, idx) => (
               <li
                 key={idx}
                 className="dropdown-item"
                 onClick={() => {
-                  valueChange(item); // Pas d'alert ici
-                  setQuery(item[labelKey]);
-                  setShowList(false);
+                  valueChange(option);
+                  setSearchInput(option[labelKey]);
+                  setIsDropdownVisible(false);
                 }}
               >
-                {highlightMatch(item[labelKey], query)}
+                {highlightSearchMatch(option[labelKey], searchInput)}
               </li>
             ))
           )}

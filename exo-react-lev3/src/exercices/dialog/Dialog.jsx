@@ -24,8 +24,11 @@ export default function Dialog({
       {modal && <div className="dialog-backdrop" />}
       <div
         className={`dialog-container ${className}`}
-        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+        }}
+        tabIndex={-1}
         role="dialog"
         aria-modal={modal}
       >

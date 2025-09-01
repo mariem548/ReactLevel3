@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import AutoFilterDropdown from "./AutoFilterDropdown";
 
 export default function UserDropDownFilter() {
-  const [users, setUsers] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then(setUsers);
+      .then((response) => response.json())
+      .then(setUserList);
   }, []);
 
   return (
     <div style={{ padding: "2rem" }}>
       <AutoFilterDropdown
-        data={users}
+        data={userList}
         labelKey="name"
-        valueChange={(val) => setSelectedUser(val)}
+        valueChange={setSelectedUser}
       />
 
       {selectedUser && (

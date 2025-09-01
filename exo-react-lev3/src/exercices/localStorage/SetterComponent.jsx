@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UseStorage } from "../UseStorage";
+import { UseStorage } from "./UseStorage";
 
 export default function SetterComponent() {
   const [input, setInput] = useState("");

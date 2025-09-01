@@ -1,19 +1,21 @@
-export const staticData = [
+export const categoryList = [
   { id: 1, name: "Entertainment" },
   { id: 2, name: "Technology" },
   { id: 3, name: "Science" },
   { id: 4, name: "Education" },
 ];
-export function filterData(data, labelKey, query) {
-  return data.filter((item) =>
-    item[labelKey].toLowerCase().includes(query.toLowerCase())
+
+// Filtre une liste d'objets selon une clé et une recherche
+export function filterListByLabel(list, labelKey, searchValue) {
+  return list.filter((element) =>
+    element[labelKey].toLowerCase().includes(searchValue.toLowerCase())
   );
 }
-/**
- * Met en surbrillance les parties d'un texte qui correspondent à une requête.
- */
-export function highlightMatch(text, query) {
-  const regex = new RegExp(`(${query})`, "i");
+
+// Met en gras la partie du texte qui correspond à la recherche
+export function highlightSearchMatch(text, searchValue) {
+  if (!searchValue) return text;
+  const regex = new RegExp(`(${searchValue})`, "i");
   return text
     .split(regex)
     .map((part, i) => (regex.test(part) ? <b key={i}>{part}</b> : part));
