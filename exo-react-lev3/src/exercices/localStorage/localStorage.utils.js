@@ -32,8 +32,3 @@ export const syncWithLocalStorage = (key, setValue) => {
   };
 };
 
-// Fonction pour supprimer une valeur du localStorage et dans l'état
-export const removeFromLocalStorage = (key) => {
-  localStorage.removeItem(key);
-  window.dispatchEvent(new Event("storage-" + key));
-};
