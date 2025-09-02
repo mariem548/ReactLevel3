@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { UseStorage } from "./UseStorage";
+import { useStorage } from "./useStorage";
 
 export default function SetterComponent() {
   const [input, setInput] = useState("");
-  const [, setStoredValue] = UseStorage("shared-key");
+  const [, setStoredValue] = useStorage("shared-key");
 
   return (
     <div>

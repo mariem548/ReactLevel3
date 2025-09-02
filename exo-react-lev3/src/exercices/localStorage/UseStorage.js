@@ -6,7 +6,7 @@ import {
   updateLocalStorage,
 } from "./localStorage.utils";
 
-export function UseStorage(key) {
+export function useStorage(key) {
   // Initialisation de l'état à partir du localStorage
   const [value, setValue] = useState(() => getInitialValue(key));
 

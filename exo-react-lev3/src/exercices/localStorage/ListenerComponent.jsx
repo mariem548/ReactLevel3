@@ -1,7 +1,7 @@
-import { UseStorage } from "./UseStorage";
+import { useStorage } from "./useStorage";
 
 export default function ListenerComponent() {
-  const [storedValue] = UseStorage("shared-key");
+  const [storedValue] = useStorage("shared-key");
 
   return (
     <div>
